@@ -1,6 +1,6 @@
 # Build Stage
 
-FROM golang:1.19-alpine AS BuildStage
+FROM golang:1.19-alpine AS ChonkyBuilder
 
 WORKDIR /app
 
@@ -17,6 +17,6 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o ./hello-world-gin
 FROM alpine:latest
 
 
-COPY --from=BuildStage /app/hello-world-gin .
+COPY --from=ChonkyBuilder /app/hello-world-gin .
 
 CMD ["./hello-world-gin"] 
